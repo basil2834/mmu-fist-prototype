@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MMU-FIST Clickable Prototype</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#eef3f8;color:#122033}
+.prototype-row{display:flex;gap:32px;align-items:flex-start;padding:28px;flex-wrap:wrap}
+.phone{width:390px;height:844px;background:#f8fbff;border-radius:0;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.18);border:1px solid #d9e2ef;position:relative}
+.header{height:64px;background:linear-gradient(135deg,#0b63d8,#0049b7);color:#fff;display:flex;align-items:center;padding:10px 16px;gap:10px}
+.logo{width:40px;height:40px;border-radius:10px;background:#fff;color:#0756c4;font-weight:800;display:flex;align-items:center;justify-content:center}
+.header small{display:block;font-size:12px;opacity:.9}
+.header h1{font-size:20px;margin:0;font-weight:800}
+.back{font-size:28px;cursor:pointer;margin-right:4px}
+.content{padding:16px;height:700px;overflow:auto}
+.hero{background:linear-gradient(135deg,#0b63d8,#004bb2);color:white;border-radius:14px;padding:20px;margin-bottom:18px}
+.hero p{margin:8px 0 0;line-height:1.45}
+.section-title{font-weight:800;color:#0057c8;margin:16px 0 10px}
+.card{background:#fff;border:1px solid #e1e8f0;border-radius:14px;padding:16px;margin:10px 0;box-shadow:0 3px 10px rgba(0,0,0,.05);display:flex;gap:14px;align-items:center;cursor:pointer}
+.card:hover{outline:2px solid #0b63d8}
+.icon{width:44px;height:44px;border-radius:12px;background:#edf5ff;color:#0b63d8;display:flex;align-items:center;justify-content:center;font-size:22px}
+.card-text{flex:1}
+.card h3{margin:0;font-size:16px}
+.card p{margin:5px 0 0;color:#607086;font-size:13px}
+.arrow{font-size:24px;color:#617085}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pills{display:flex;gap:8px;overflow:auto;margin:12px 0}
+.pill{border:1px solid #0b63d8;color:#0b63d8;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;background:white;white-space:nowrap;cursor:pointer}
+.pill.active{background:#0b63d8;color:white}
+.search{height:46px;background:#fff;border:1px solid #dfe7f2;border-radius:24px;padding:0 18px;color:#7b8794;display:flex;align-items:center;margin-bottom:12px}
+.feature{background:linear-gradient(135deg,#0b63d8,#0049b7);color:#fff;border-radius:16px;padding:16px;margin:12px 0}
+.feature button{width:100%;border:none;background:#fff;color:#0756c4;border-radius:24px;padding:12px;font-weight:800;margin-top:12px;cursor:pointer}
+.info-box{background:#fff;border:1px solid #e1e8f0;border-radius:12px;padding:14px;margin:10px 0}
+.info-box h3{margin:0 0 8px;color:#0756c4;font-size:14px}
+.info-box p,.info-box li{font-size:13px;line-height:1.45}
+.tags span{display:inline-block;background:#eaf3ff;color:#0756c4;border-radius:14px;padding:6px 10px;margin:3px;font-size:12px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+button{font-family:inherit}
+.btn{border:1px solid #0b63d8;background:white;color:#0b63d8;border-radius:10px;padding:11px;font-weight:800;cursor:pointer}
+.btn.primary{background:#0756c4;color:#fff}
+.btn.danger{background:#ed111a;color:white;border-color:#ed111a;width:100%;margin-top:8px}
+.form-card{background:#fff;border:1px solid #dfe7f2;border-radius:16px;padding:16px}
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+input,select,textarea{width:100%;padding:14px;border:1px solid #dbe3ee;border-radius:12px;font-size:14px;background:white}
+.submit{width:100%;background:#ed111a;color:white;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:800;margin-top:20px;cursor:pointer}
+.success-card{background:white;border:1px solid #dfe7f2;border-radius:18px;padding:28px 18px;text-align:center;margin-top:12px}
+.check{width:90px;height:90px;border-radius:50%;background:#e9f8ec;color:#2fad4a;display:flex;align-items:center;justify-content:center;font-size:58px;margin:8px auto 20px}
+.summary{background:#fff;border:1px solid #dfe7f2;border-radius:12px;text-align:left;margin:18px 0;padding:14px}
+.summary div{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf0f5}
+.summary div:last-child{border-bottom:none}
+.nav{position:absolute;bottom:0;left:0;right:0;height:64px;background:#fff;border-top:1px solid #dfe7f2;display:flex;justify-content:space-around;align-items:center}
+.nav div{font-size:11px;text-align:center;color:#526173;cursor:pointer}
+.nav .active{color:#0756c4;font-weight:800}
+.nav span{display:block;font-size:20px}
+.screen-label{width:390px;text-align:center;font-weight:800;margin:-18px 0 4px;color:#334155}
+</style>
+</head>
+<body>
+<div class="prototype-row">
+
+<section class="phone" id="home">
+  <div class="header"><div class="logo">FIST</div><div><small>MMU-FIST</small><h1>Welcome</h1></div></div>
+  <div class="content">
+    <div class="hero"><b>FACULTY OF INFORMATION SCIENCE & TECHNOLOGY</b><h2>Hi Student 👋</h2><p>Explore FIST programmes, apply online, and get support easily.</p></div>
+    <div class="section-title">Program Explorer & Application</div>
+    <div class="card" onclick="go('programs')"><div class="icon">🎓</div><div class="card-text"><h3>Explore Programs</h3><p>Foundation, Diploma, Degree & Postgrad</p></div><div class="arrow">›</div></div>
+    <div class="section-title">Smart Student Support</div>
+    <div class="grid">
+      <div class="card" onclick="go('consultation')"><div class="icon">📅</div><div class="card-text"><h3>Book Consultation</h3><p>1-to-1 online session</p></div><div class="arrow">›</div></div>
+      <div class="card" onclick="go('assistant')"><div class="icon">❔</div><div class="card-text"><h3>Need Help?</h3><p>FAQ & support</p></div><div class="arrow">›</div></div>
+    </div>
+    <div class="section-title">Quick Info</div>
+    <div class="card" onclick="go('assistant')"><div class="icon">✨</div><div class="card-text"><h3>AI Smart Assistant</h3><p>Get instant answers about FIST</p></div><div class="arrow">›</div></div>
+    <div class="card" onclick="go('details')"><div class="icon">📄</div><div class="card-text"><h3>Application Made Easy</h3><p>Apply online in a few minutes</p></div><div class="arrow">›</div></div>
+    <div class="card" onclick="go('assistant')"><div class="icon">❔</div><div class="card-text"><h3>FAQ</h3><p>Common student questions answered</p></div><div class="arrow">›</div></div>
+  </div>
+  <div class="nav"><div class="active" onclick="go('home')"><span>⌂</span>Home</div><div onclick="go('programs')"><span>🎓</span>Programs</div><div onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="programs">
+  <div class="header"><div class="logo">FIST</div><div><small>MMU-FIST</small><h1>FIST Programs</h1></div></div>
+  <div class="content">
+    <div class="search">🔍 &nbsp; Search programmes...</div>
+    <div class="pills"><button class="pill active">All</button><button class="pill">Foundation</button><button class="pill">Diploma</button><button class="pill" onclick="go('degree')">Bachelor Degree</button><button class="pill">Postgraduate</button></div>
+    <div class="card"><div class="card-text"><h3>Foundation in Information Technology</h3><p>One-year pathway into FIST degree programmes.</p></div><div class="arrow">→</div></div>
+    <div class="card"><div class="card-text"><h3>Diploma in Information Technology</h3><p>Two-and-a-half year hands-on diploma in IT.</p></div><div class="arrow">→</div></div>
+    <div class="card"><div class="card-text"><h3>Master of Science (Information Technology) by Research</h3><p>Advance your research career in IT and computing.</p></div><div class="arrow">→</div></div>
+    <div class="card"><div class="card-text"><h3>PhD in Information Technology</h3><p>Doctoral research at the frontier of computing.</p></div><div class="arrow">→</div></div>
+    <div class="card" onclick="go('details')"><div class="card-text"><h3>Bachelor of Information Technology (Hons) (Security Technology)</h3><p>Specialise in cybersecurity, ethical hacking and digital forensics.</p></div><div class="arrow">→</div></div>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div class="active"><span>🎓</span>Programs</div><div onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="degree">
+  <div class="header"><div class="logo">FIST</div><div><small>MMU-FIST</small><h1>FIST Programs</h1></div></div>
+  <div class="content">
+    <div class="search">🔍 &nbsp; Search programmes...</div>
+    <div class="pills"><button class="pill">All</button><button class="pill">Foundation</button><button class="pill">Diploma</button><button class="pill active">Bachelor Degree</button><button class="pill">Postgraduate</button></div>
+    <div class="feature"><b>Featured</b><h2>Bachelor Degree Programmes</h2><p>Honours degrees in IT, CS, AI & more</p><button onclick="go('details')">View Degrees →</button></div>
+    <div class="card"><div class="card-text"><h3>Bachelor of Information Technology (Hons) (Data Communications and Networking)</h3><p>Build, secure and manage modern computer networks.</p></div><div class="arrow">→</div></div>
+    <div class="card" onclick="go('details')"><div class="card-text"><h3>Bachelor of Information Technology (Hons) (Security Technology)</h3><p>Specialise in cybersecurity, ethical hacking and digital forensics.</p></div><div class="arrow">→</div></div>
+    <div class="card"><div class="card-text"><h3>Bachelor of Information Technology (Artificial Intelligence)</h3><p>Machine learning, computer vision and intelligent systems.</p></div><div class="arrow">→</div></div>
+    <div class="card"><div class="card-text"><h3>Bachelor of Computer Science</h3><p>Foundation in computing theory, software and algorithms.</p></div><div class="arrow">→</div></div>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div class="active"><span>🎓</span>Programs</div><div onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="details">
+  <div class="header"><div class="back" onclick="go('degree')">‹</div><div><small>MMU-FIST</small><h1>Programme Details</h1></div></div>
+  <div class="content">
+    <div class="hero"><small>FIST · MMU</small><h3>Bachelor of Information Technology (Hons) (Security Technology)</h3><p>Faculty of Information Science and Technology · MQA/FA1235</p></div>
+    <div class="info-box"><h3>About the Programme</h3><p>A future-ready programme designed to equip students with strong technical and professional skills.</p></div>
+    <div class="info-box"><h3>Programme Educational Objectives</h3><ul><li>Produce competent IT graduates.</li><li>Develop ethical professionals.</li><li>Encourage lifelong learning.</li></ul></div>
+    <div class="info-box"><h3>Programme Outcomes</h3><ul><li>Apply knowledge of computing.</li><li>Design secure computing solutions.</li><li>Communicate effectively.</li></ul></div>
+    <div class="info-box"><h3>Career Prospects</h3><div class="tags"><span>Security Analyst</span><span>Penetration Tester</span><span>SOC Analyst</span><span>Forensic Investigator</span></div></div>
+    <div class="info-box"><h3>Entry Requirements</h3><ul><li>STPM / A-Level: Min CGPA 2.50</li><li>UEC: Min Grade B in 5 subjects</li><li>Foundation / Diploma: Min CGPA 2.50</li></ul></div>
+    <div class="btn-row"><button class="btn">Enquire Now</button><button class="btn primary">How to Apply</button><button class="btn">Brochure</button><button class="btn">Fees PDF</button></div>
+    <button class="btn danger" onclick="go('apply')">Apply Now</button>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div class="active" onclick="go('programs')"><span>🎓</span>Programs</div><div onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="apply">
+  <div class="header"><div class="back" onclick="go('details')">‹</div><div><small>MMU-FIST</small><h1>Apply Now</h1></div></div>
+  <div class="content">
+    <p>Fill in the form below — this is a prototype submission.</p>
+    <div class="form-card">
+      <label>Full Name</label><input />
+      <label>Email</label><input />
+      <label>Phone Number</label><input />
+      <label>Nationality</label><select><option>Malaysian</option><option>International</option></select>
+      <label>Selected Programme</label><select><option>Bachelor of Information Technology (Hons) (Security Technology)</option></select>
+      <label>Intake</label><select><option>March 2026</option></select>
+      <button class="submit" onclick="go('submitted')">Submit Application</button>
+    </div>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div class="active" onclick="go('programs')"><span>🎓</span>Programs</div><div onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="submitted">
+  <div class="header"><div class="back" onclick="go('apply')">‹</div><div><small>MMU-FIST</small><h1>Application Submitted</h1></div></div>
+  <div class="content">
+    <div class="success-card">
+      <div class="check">✓</div>
+      <h2>Application Submitted Successfully</h2>
+      <p>Your application has been submitted successfully. You can download your application form below for reference.</p>
+      <div class="summary"><div><span>Application ID:</span><b>APP-2026-0315</b></div><div><span>Programme:</span><b>BIT (Hons) Security Technology</b></div><div><span>Intake:</span><b>March 2026</b></div></div>
+      <button class="btn primary" style="width:100%">Download Application Form</button>
+      <button class="btn" style="width:100%;margin-top:12px" onclick="go('home')">Back to Home</button>
+    </div>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div class="active" onclick="go('programs')"><span>🎓</span>Programs</div><div onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="services">
+  <div class="header"><div class="logo">FIST</div><div><small>MMU-FIST</small><h1>Services</h1></div></div>
+  <div class="content">
+    <div class="card" onclick="go('consultation')"><div class="icon">📅</div><div class="card-text"><h3>Book Online Consultation</h3><p>Schedule a 1-to-1 session with FIST/MMU staff.</p></div><div class="arrow">›</div></div>
+    <div class="card" onclick="go('assistant')"><div class="icon">✨</div><div class="card-text"><h3>AI Smart Assistant</h3><p>Ask programme, fees and application questions.</p></div><div class="arrow">›</div></div>
+    <div class="card"><div class="icon">📆</div><div class="card-text"><h3>MMU Academic Calendar</h3><p>View important academic dates.</p></div><div class="arrow">›</div></div>
+    <div class="card"><div class="icon">🌐</div><div class="card-text"><h3>MMU Portal</h3><p>Access official university services.</p></div><div class="arrow">›</div></div>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div onclick="go('programs')"><span>🎓</span>Programs</div><div class="active"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="assistant">
+  <div class="header"><div class="back" onclick="go('home')">‹</div><div><small>MMU-FIST</small><h1>AI Smart Assistant</h1></div></div>
+  <div class="content">
+    <div class="hero"><h2>How can I help you?</h2><p>Ask about programmes, fees, application steps, entry requirements, and consultation booking.</p></div>
+    <div class="card"><div class="card-text"><h3>What are the entry requirements?</h3><p>Suggested question</p></div></div>
+    <div class="card"><div class="card-text"><h3>How do I apply online?</h3><p>Suggested question</p></div></div>
+    <div class="card"><div class="card-text"><h3>What are the programme fees?</h3><p>Suggested question</p></div></div>
+    <button class="submit" onclick="go('consultation')">Book Consultation</button>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div onclick="go('programs')"><span>🎓</span>Programs</div><div class="active" onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="consultation">
+  <div class="header"><div class="back" onclick="go('services')">‹</div><div><small>MMU-FIST</small><h1>Book Consultation</h1></div></div>
+  <div class="content">
+    <div class="form-card">
+      <label>Enquiry Category</label><select><option>Programme Enquiry</option></select>
+      <label>Department</label><select><option>Faculty of Information Science and Technology</option></select>
+      <label>Full Name</label><input />
+      <label>Email</label><input />
+      <label>Phone Number</label><input />
+      <label>Student Type</label><select><option>Prospective Student</option></select>
+      <label>Programme Interested In</label><select><option>Security Technology</option></select>
+      <label>Preferred Date</label><input type="date"/>
+      <label>Preferred Time</label><select><option>10:00 AM</option></select>
+      <label>Enquiry Details</label><textarea rows="3"></textarea>
+      <button class="submit" onclick="go('review')">Review Booking</button>
+    </div>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div onclick="go('programs')"><span>🎓</span>Programs</div><div class="active" onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="review">
+  <div class="header"><div class="back" onclick="go('consultation')">‹</div><div><small>MMU-FIST</small><h1>Review Booking</h1></div></div>
+  <div class="content">
+    <div class="success-card">
+      <h2>Review Consultation Details</h2>
+      <div class="summary"><div><span>Department:</span><b>FIST</b></div><div><span>Date:</span><b>18 June 2026</b></div><div><span>Time:</span><b>10:00 AM</b></div><div><span>Type:</span><b>Programme Enquiry</b></div></div>
+      <button class="btn" style="width:100%" onclick="go('consultation')">Edit Details</button>
+      <button class="submit" onclick="go('bookingdone')">Confirm Booking</button>
+    </div>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div onclick="go('programs')"><span>🎓</span>Programs</div><div class="active" onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+<section class="phone" id="bookingdone">
+  <div class="header"><div class="back" onclick="go('review')">‹</div><div><small>MMU-FIST</small><h1>Booking Confirmed</h1></div></div>
+  <div class="content">
+    <div class="success-card">
+      <div class="check">✓</div>
+      <h2>Consultation Booked Successfully</h2>
+      <div class="summary"><div><span>Booking ID:</span><b>BK-2026-0618</b></div><div><span>Department:</span><b>FIST</b></div><div><span>Date:</span><b>18 June 2026</b></div><div><span>Time:</span><b>10:00 AM</b></div></div>
+      <button class="btn primary" style="width:100%">Download Confirmation PDF</button>
+      <button class="btn" style="width:100%;margin-top:12px" onclick="go('home')">Back to Home</button>
+    </div>
+  </div>
+  <div class="nav"><div onclick="go('home')"><span>⌂</span>Home</div><div onclick="go('programs')"><span>🎓</span>Programs</div><div class="active" onclick="go('services')"><span>💼</span>Services</div><div><span>♙</span>Profile</div></div>
+</section>
+
+</div>
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});}
+</script>
+</body>
+</html>
